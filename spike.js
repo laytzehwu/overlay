@@ -62,7 +62,7 @@ var FSOverlay = function (option) {
             }
 
             $overlayHandle.css(overlayStyle);
-            if (defaultClassName) $overlayHandle.addClass("fs-mobile-overlay");
+            if (defaultClassName) $overlayHandle.addClass(defaultClassName);
             $overlayHandle.click(clickEven);
             $("body").append($overlayHandle);
         },
