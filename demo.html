@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Overlay demo</title>
+
+</head>
+<style>
+body {
+    font-family: Verdana,sans-serif;
+    font-size: 12px;
+}
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+.codeBlock {
+    clear: left;
+    border: 5px dashed #cccccc;
+    float: left;
+    min-width: 400px;
+    min-height: 100px;
+    padding: 10px;
+    position: relative;
+    margin: 10px;
+}
+.codeBlock:before {
+    content: "Code";
+    position: absolute;
+    top: 0;
+    left: 0;
+    color: #cccccc;
+    font-size: 1em;
+}
+
+.demoDesc {
+    float: left;
+    padding: 10px;
+    margin: 10px;
+    min-width: 100px;
+    min-height: 100px;
+}
+
+section {
+    clear: both;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+</style>
+<body>
+ <header>
+  <h1>Overlay Demo</h1>
+  <nav>
+      <a href="#demo1">demo1: Simply show it.</a>
+      <a href="#demo2">demo2: Show it as own style.</a>
+  </nav>
+  <hr />
+ </header>
+
+ <section>
+     <header><a name="demo1"><h2>Simple show it and hide by click it.</h2></a></header>
+     <div class="codeBlock">
+        <pre>
+        var overlay = new Overlay();
+        overlay.show();
+        </pre>
+     </div>
+     <div class="demoDesc">
+         <p>Please click on the test button and screen will be masked. Don't worry, just click on the screen and get it unlock.</p>
+         <button id="demo1">Test</button>
+     </div>
+ </section>
+ <section>
+     <header><a name="demo2"><h2>Show it as your own style.</h2></a></header>
+     <div class="codeBlock">
+        <pre>
+        var overlay = new Overlay({
+            css: {
+                "background-color": "#00aa00",
+                "opacity": 0.8,
+                "filter": "alpha(opacity=80)"
+            }
+         });
+        overlay.show();
+        </pre>
+     </div>
+     <div class="demoDesc">
+         <p>You may place your style in the constructor. </p>
+         <button id="demo2">Test</button>
+     </div>
+     <div class="codeBlock">
+        <pre>
+        var overlay = new Overlay();
+        overlay.show({
+            css: {
+                "background-color": "#00aa00",
+                "opacity": 0.8,
+                "filter": "alpha(opacity=80)"
+            }
+         });
+        </pre>
+     </div>
+     <div class="demoDesc">
+         <p>You may place your style while showing. </p>
+         <button id="demo2-1">Test</button>
+     </div>
+ </section>
+ <footer>
+   <a href="SpecRunner.html"> Unit test</a>
+ </footer>
+</body>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script type="text/javascript" src="src/Overlay.js"></script>
+<script>
+$(document).ready(function () {
+    $("#demo1").click(function () {
+        var overlay = new Overlay();
+        overlay.show();
+    });
+    $("#demo2").click(function () {
+        var overlay = new Overlay({
+            css: {
+                "background-color": "#00aa00",
+                "opacity": 0.8,
+                "filter": "alpha(opacity=80)"
+            }
+         });
+        overlay.show();
+    });
+    $("#demo2-1").click(function () {
+        var overlay = new Overlay();
+        overlay.show({
+            css: {
+                "background-color": "#00aa00",
+                "opacity": 0.8,
+                "filter": "alpha(opacity=80)"
+            }
+         });
+    });
+});
+</script>
+</html>
