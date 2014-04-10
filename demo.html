@@ -57,6 +57,7 @@ footer {
   <nav>
       <a href="#demo1">demo1: Simply show it.</a>
       <a href="#demo2">demo2: Show it as own style.</a>
+      <a href="#demo3">dome3: Click handler</a>
   </nav>
   <hr />
  </header>
@@ -97,7 +98,7 @@ footer {
         var overlay = new Overlay();
         overlay.show({
             css: {
-                "background-color": "#00aa00",
+                "background-color": "#0000aa",
                 "opacity": 0.8,
                 "filter": "alpha(opacity=80)"
             }
@@ -108,6 +109,82 @@ footer {
          <p>You may place your style while showing. </p>
          <button id="demo2-1">Test</button>
      </div>
+ </section>
+ <section>
+   <header><a name="demo3"><h2>Pass handler to click event.</h2></a></header>
+   <div class="codeBlock">
+       <pre>
+           var $messageBlock = $("&lt;div&gt;&lt;&#47;div&gt;");
+           $messageBlock.css({
+                height: "100px",
+                width: "100px",
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                "margin-top": "-50px",
+                "margin-left": "-50px",
+                "background-color": "#fff",
+                <b>"z-index": 2</b>
+           });
+           $messageBlock.html("&lt;h1&gt;Hello!&lt;&#47;h1&gt;");
+           $("body").append($messageBlock);
+           var overlay = new Overlay({
+            css: {
+                <b>"z-index": 1</b>
+            },
+            click: function () {
+                $messageBlock.hide();
+                $messageBlock.remove();
+            }
+           });
+           overlay.show();
+       </pre>
+   </div>
+   <div class="demoDesc">
+     <p>You can put your elements on top of the overlay by setting larger z-index. </p>
+     <p>You also can add a hanlder to remove your message while click the overlay.</p>
+     <button id="demo3">Test</button>
+   </div>
+   <div class="codeBlock">
+       <pre>
+           var $messageBlock = $("&lt;div&gt;&lt;&#47;div&gt;");
+           $messageBlock.css({
+                height: "200px",
+                width: "200px",
+                position: "fixed",
+                top: "50%",
+                left: "50%",
+                "margin-top": "-100px",
+                "margin-left": "-100px",
+                "background-color": "#fff",
+                "z-index": 2
+           });
+           $messageBlock.html("&lt;h1&gt;Hello!&lt;&#47;h1&gt;");
+           var overlay = new Overlay();
+           overlay.show({
+            css: {
+                "z-index": 1
+            },
+            click: function () {
+                $messageBlock.hide();
+                $messageBlock.remove();
+            }
+           });
+           $closeButton = $("&lt;button&gt;Close&lt;&#47;button&gt;");
+           $closeButton.click(function () {
+                $messageBlock.hide();
+                $messageBlock.remove();
+                <b>overlay.hide();</b>
+           });
+           $messageBlock.append($closeButton);
+           $("body").append($messageBlock);
+    });
+       </pre>
+   </div>
+   <div class="demoDesc">
+     <p>The overlay object can be passed into your element event. </p>
+     <button id="demo3a">Test</button>
+   </div>
  </section>
  <footer>
    <a href="SpecRunner.html"> Unit test</a>
@@ -135,11 +212,70 @@ $(document).ready(function () {
         var overlay = new Overlay();
         overlay.show({
             css: {
-                "background-color": "#00aa00",
+                "background-color": "#0000aa",
                 "opacity": 0.8,
                 "filter": "alpha(opacity=80)"
             }
          });
+    });
+    $("#demo3").click(function () {
+       var $messageBlock = $("<div></div>");
+       $messageBlock.css({
+            height: "100px",
+            width: "100px",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            "margin-top": "-50px",
+            "margin-left": "-50px",
+            "background-color": "#fff",
+            "z-index": 2
+       });
+       $messageBlock.html("<h1>Hello!</h1>");
+       $("body").append($messageBlock);
+       var overlay = new Overlay({
+        css: {
+            "z-index": 1
+        },
+        click: function () {
+            $messageBlock.hide();
+            $messageBlock.remove();
+        }
+       });
+       overlay.show();
+    });
+    $("#demo3a").click(function () {
+       var $messageBlock = $("<div></div>");
+       $messageBlock.css({
+            height: "200px",
+            width: "200px",
+            position: "fixed",
+            top: "50%",
+            left: "50%",
+            "margin-top": "-100px",
+            "margin-left": "-100px",
+            "background-color": "#fff",
+            "z-index": 2
+       });
+       $messageBlock.html("<h1>Hello!</h1>");
+       var overlay = new Overlay();
+       overlay.show({
+        css: {
+            "z-index": 1
+        },
+        click: function () {
+            $messageBlock.hide();
+            $messageBlock.remove();
+        }
+       });
+       $closeButton = $("<button>Close</button>");
+       $closeButton.click(function () {
+            $messageBlock.hide();
+            $messageBlock.remove();
+            overlay.hide();
+       });
+       $messageBlock.append($closeButton);
+       $("body").append($messageBlock);
     });
 });
 </script>

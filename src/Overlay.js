@@ -31,8 +31,11 @@ function Overlay(option) {
         "z-index": 1
     };
 
-    var that = this;
     var customClickEven = null;
+    if (option.click && typeof(option.click) == "function") {
+        customClickEven = option.click;
+    }
+    var that = this;
     var clickEvent = function (evt) {
         if (typeof(customClickEven) == "function") {
             customClickEven(evt);
